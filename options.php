@@ -51,11 +51,13 @@ if ($request->isAjaxRequest()) {
     }
     if(isset($_POST['ajax_convert_files'])){
         $filesToConvert = explode(',', $_POST['ajax_convert_files']);
+        $result = [];
         foreach ($filesToConvert as $file) {
             if(\WebpConvert\Main\Main::webpConvert($file)){
-                echo \WebpConvert\Main\Main::getFileName($file);
+                $result[] =  \WebpConvert\Main\Main::getFileName($file);
             }
         }
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
     die();
 }

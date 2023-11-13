@@ -61,7 +61,7 @@
 /*
 custom-scroll-bar
 */
-.scroll-block {min-height: 150px; min-width: 600px;background: #ffffff;overflow-y: scroll;border:1px solid #ffffff;padding: 5px 20px 5px 20px;}
+.scroll-block {min-height: 150px; min-width: 600px;background: #ffffff;overflow-y: scroll;border:1px solid #ffffff;padding: 5px 20px 5px 50px;}
 .scroll-block::-webkit-scrollbar-track {border-radius: 4px;}
 .scroll-block::-webkit-scrollbar {width: 4px;}
 .scroll-block::-webkit-scrollbar-thumb {border-radius: 4px;background: #f0f2f5;}

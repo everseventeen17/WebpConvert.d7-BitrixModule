@@ -12,7 +12,8 @@ class Main
             return false;
         }
         $file_type = exif_imagetype($file);
-        $output_file =  explode('.', $file)[0] . '.webp';
+        $pathInfo = pathinfo($file);
+        $output_file = $pathInfo['dirname'] . "/" . $pathInfo['filename'] . '.webp';
         if (file_exists($output_file)) {
             return $output_file;
         }

@@ -109,6 +109,11 @@ function handleButtonLoader(button) {
     button.removeAttribute('disabled')
     $('.adm-btn-load-img-green').remove();
 }
+function resetFormToZero(button){
+    handleButtonLoader(button)
+    $('.form-ajax__action').attr('name', 'ajax_find_files');
+    $('.form-ajax__action').val(1)
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     if (!Object.prototype.length) {
@@ -119,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
     let convertForm = document.querySelector('.form__convert');
-    let convertButton = document.querySelector('.adm-btn-save');
+    let convertButton = document.querySelector('input[class$="adm-btn-save"]');
     convertForm.addEventListener('submit', function (e) {
         e.preventDefault();
         let responseWrapper = document.querySelector('.files-list-wrapper');
@@ -172,9 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                         appendResultHtml(array);
                                         handleFilesNames();
                                         appendProgressBartHtml(calculatePercentage(array.length - 1, convertedCount))
-                                        handleButtonLoader(convertButton) // убираем лоадер с кнопки
-                                        $('.form-ajax__action').attr('name', 'ajax_find_files');
-                                        $('.form-ajax__action').val(1)
+                                        resetFormToZero(convertButton)// обнуляем форму
                                     } else {
                                         appendResultContainerHtml(array.length - 1, convertedCount);
                                         handleFilesNames();
@@ -182,13 +185,17 @@ document.addEventListener("DOMContentLoaded", function () {
                                         appendProgressBartHtml(calculatePercentage(array.length - 1, convertedCount))
                                         next();
                                     }
+                                },
+                                error: function(errorResponse) {
+                                    console.log(errorResponse)
+                                    resetFormToZero(convertButton) //обнуляем форму
+                                    return;
                                 }
                             });
                         }
                         next();
                     }
                     runAllAjax(response)
-
                 }
             }
         });
